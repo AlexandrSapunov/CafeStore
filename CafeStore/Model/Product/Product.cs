@@ -7,6 +7,7 @@
         private int _price;
         private string _description;
         private Category _category;
+        private int _quantity;
 
         public int ID
         {
@@ -65,7 +66,19 @@
             set
             {
                 _category = value;
-                OnPropertyChanged(nameof(Category));
+                OnPropertyChanged(nameof(PCategory));
+            }
+        }
+        public int Quantity
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
+                OnPropertyChanged(nameof(Quantity));
             }
         }
     }

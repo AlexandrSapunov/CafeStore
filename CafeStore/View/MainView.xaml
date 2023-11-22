@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeStore.View"
+        xmlns:vm="clr-namespace:CafeStore.ViewModel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    <Grid>
+        Title="{DynamicResource Catalog}" Height="450" Width="800">
+
+    
+    <Grid Margin="20 5 5 5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60*"/>
             <ColumnDefinition Width="40*"/>
@@ -14,14 +17,115 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="80*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
-        
-        
 
-        <ListBox Grid.Column="0" Grid.Row="1" Margin="10 5">
+        <DockPanel LastChildFill="False" Grid.Column="1" Grid.Row="1">
             
+        </DockPanel>
+
+
+        <UniformGrid Columns="1" Rows="2" Margin="15 5">
+            <TextBlock Text="{DynamicResource Filter}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <UniformGrid Columns="2" Rows="1">
+                <TextBlock Text="{DynamicResource Category}" FontSize="20" VerticalAlignment="Center" Margin="20 5"/>
+                <ComboBox ItemsSource="{Binding Data.Categories}" SelectedItem="{Binding SelectedCategory}" SelectedIndex="0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </UniformGrid>
+        </UniformGrid>
+        <ListBox ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" Grid.Column="0" Grid.Row="1" Margin="15 5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Title}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Path=Price}" Grid.Column="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
+
+
+        <UniformGrid Columns="2" Rows="2" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="15 5">
+            <TextBlock Text="{DynamicResource OrderOnSum}" FontSize="20"/>
+            <TextBlock Text="{Binding CurrentOrder.Sum}"/>
+            <TextBlock Text="Оплатить" FontSize="18"/>
+            <Button >
+                <Viewbox>
+                    <materialDesign:PackIcon Kind="Payment"/>
+                </Viewbox>
+            </Button>
+        </UniformGrid>
+
+
+        <ListBox ItemsSource="{Binding OrderProducts}" SelectedItem="{Binding SelectedProductInOrder}"
+                 Margin="10 5"
+                 Grid.Column="1" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Path=Title}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Path=Price}" Grid.Column="2"/>
+                        <TextBlock Text="{DynamicResource Quantity}" Grid.ColumnSpan="2" Grid.Row="1"/>
+                        <TextBlock Text="{Binding Quantity}" Grid.Column="2" Grid.Row="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <UniformGrid Columns="3" Rows="1" Grid.Row="2">
+            <Button MaxHeight="60" MaxWidth="150" >
+                <Viewbox>
+                    <TextBlock Text="{DynamicResource Profile}"/>
+                </Viewbox>
+            </Button>
+            <Button MaxHeight="60" MaxWidth="150" Command="{Binding AddInOrder}">
+                <Viewbox>
+                    <TextBlock Text="{DynamicResource AddInOrder}"/>
+                </Viewbox>
+            </Button>
+            <Button MaxHeight="60" MaxWidth="150" >
+                <Viewbox>
+                    <TextBlock Text="{DynamicResource AdminView}"/>
+                </Viewbox>
+            </Button>
+        </UniformGrid>
+        
+        <UniformGrid Columns="3" Rows="1" Grid.Row="2" Grid.Column="1">
+            <Button  Margin="10 5" Command="{Binding RemoveQuantity}">
+                <Viewbox>
+                    <TextBlock Text="-" FontSize="18"/>
+                </Viewbox>
+            </Button>
+            <Button  Margin="10 5" Command="{Binding DelProductInOrder}">
+                <Viewbox>
+                    <materialDesign:PackIcon Kind="Delete"/>
+                </Viewbox>
+            </Button>
+            <Button  Margin="10 5" Command="{Binding AddQuantity}">
+                <Viewbox>
+                    <TextBlock Text="+" FontSize="18"/>
+                </Viewbox>
+            </Button>
+
+        </UniformGrid>
         
     </Grid>
 </Window>

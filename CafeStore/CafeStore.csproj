@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="BaseVM.cs" />
     <Compile Include="Model\DataStorage\DataKeeper.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Model\Product\Category.cs" />
     <Compile Include="Model\Product\Product.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\INavigationWin.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>

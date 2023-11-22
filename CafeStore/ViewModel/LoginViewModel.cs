@@ -44,8 +44,11 @@ namespace CafeStore.ViewModel
                 {
                     if (Data.SignIn(CurrentUser))
                     {
-
+                        MainViewModel vm = new MainViewModel(_navigation,Data);
+                        _navigation.Show(View.WindowEnum.mainView, vm);
                     }
+                    else
+                        MessageBox.Show("Incorrect email or password!");
                 }));
             }
         }
@@ -63,10 +66,8 @@ namespace CafeStore.ViewModel
         public LoginViewModel(INavigationWin navigation, DataKeeper data)
         {
             _navigation = navigation;
-            _iniCmd();
-        }
-        public LoginViewModel()
-        {
+            Data = data;
+            CurrentUser = new User();
             _iniCmd();
         }
         private void _iniCmd()

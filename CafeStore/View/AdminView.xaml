@@ -221,7 +221,7 @@
                                  DockPanel.Dock="Top" Margin="5"/>
                         <TextBlock Text="{DynamicResource Category}" DockPanel.Dock="Top"/>
                         <ComboBox ItemsSource="{Binding Data.Categories}" 
-                                  SelectedItem="{Binding SelectedProduct.PCategory.Name}" 
+                                  SelectedItem="{Binding SelectedProduct.PCategory}" 
                                   DockPanel.Dock="Top" Margin="5">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>

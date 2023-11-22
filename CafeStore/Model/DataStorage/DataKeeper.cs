@@ -14,6 +14,7 @@ namespace CafeStore.Model.DataStorage
         public ObservableCollection<Position> Positions { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
         public ObservableCollection<Product.Product> Products { get; set; }
+        public ObservableCollection<Order> Orders { get; set; }
 
         public DataKeeper()
         {
@@ -21,6 +22,7 @@ namespace CafeStore.Model.DataStorage
             Positions = new ObservableCollection<Position>();
             Categories = new ObservableCollection<Category>();
             Products = new ObservableCollection<Product.Product>();
+            Orders = new ObservableCollection<Order>();
         }
 
         public static void Save(DataKeeper data)
@@ -215,6 +217,21 @@ namespace CafeStore.Model.DataStorage
                 max = Products.Max(p=>p.ID);
             }
             return max + 1;
+        }
+        #endregion
+
+        #region Order
+        public bool AddOrder(Order order)
+        {
+            if (order.Products.Count > 0)
+            {
+                if (order.Salesman != null)
+                {
+                    Orders.Add(order);
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
     }

@@ -51,7 +51,7 @@ namespace CafeStore.View
                     CWindow = new LoginView();
                     break;
                 case WindowEnum.mainView:
-
+                    CWindow = new MainView();
                     break;
                 case WindowEnum.adminView:
                     CWindow = new AdminView();

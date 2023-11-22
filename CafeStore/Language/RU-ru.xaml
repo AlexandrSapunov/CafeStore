@@ -13,6 +13,14 @@
     <system:String x:Key="Products">Товары</system:String>
     <system:String x:Key="Categories">Категории</system:String>
     <system:String x:Key="Positions">Должности</system:String>
+    
+    <system:String x:Key="Catalog">Каталог</system:String>
+    <system:String x:Key="Profile">Профиль</system:String>
+    <system:String x:Key="Filter">Фильтр</system:String>
+    <system:String x:Key="Order">Заказ</system:String>
+    <system:String x:Key="OrderOnSum">Заказ на сумму</system:String>
+    <system:String x:Key="Quantity">Количество</system:String>
+    <system:String x:Key="AddInOrder">Добавить в заказ</system:String>
 
     <system:String x:Key="Information">Информация</system:String>
     <system:String x:Key="Discounts">Скидки</system:String>
