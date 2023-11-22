@@ -1,0 +1,337 @@
+﻿<Window x:Class="CafeStore.View.AdminView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CafeStore.View"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:CafeStore.ViewModel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="{DynamicResource AdminView}" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:AdminViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <TabControl>
+            <TabItem Header="{DynamicResource Users}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="80*"/>
+                        <RowDefinition Height="15*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{DynamicResource Users}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ListBox Grid.Column="0" Grid.Row="1"
+                             ItemsSource="{Binding Data.Users}"
+                             SelectedItem="{Binding SelectedUser}"
+                             IsEnabled="{Binding IsSelectedListUser}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <UniformGrid Columns="1" Rows="2" MinHeight="50" Margin="10 5">
+                                    <TextBlock FontSize="16">
+                                        <Run Text="{Binding Path=Fname}"/>
+                                        <Run Text="{Binding Path=Sname}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" Text="{Binding Path=Post.Title}"/>
+                                </UniformGrid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <TextBlock Text="{DynamicResource Information}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
+                        <TextBlock DockPanel.Dock="Top" Margin="10 5">
+                            <Run Text="{DynamicResource Fname}"/>
+                            <Run Text=":"/>
+                        </TextBlock>
+                        <TextBox Text="{Binding SelectedUser.Fname}" DockPanel.Dock="Top" Margin="10 5"/>
+
+                        <TextBlock DockPanel.Dock="Top" Margin="10 5">
+                            <Run Text="{DynamicResource Sname}"/>
+                            <Run Text=":"/>
+                        </TextBlock>
+                        <TextBox Text="{Binding SelectedUser.Sname}" DockPanel.Dock="Top" Margin="10 5"/>
+
+                        <TextBlock DockPanel.Dock="Top" Margin="10 5">
+                            <Run Text="{DynamicResource Email}"/>
+                            <Run Text=":"/>
+                        </TextBlock>
+                        <TextBox Text="{Binding SelectedUser.Email}" DockPanel.Dock="Top" Margin="10 5"/>
+
+                        <TextBlock DockPanel.Dock="Top" Margin="10 5">
+                            <Run Text="{DynamicResource Password}"/>
+                            <Run Text=":"/>
+                        </TextBlock>
+                        <TextBox Text="{Binding SelectedUser.Password}" DockPanel.Dock="Top" Margin="10 5"/>
+
+                        <UniformGrid Columns="2" Rows="1" DockPanel.Dock="Top">
+                            <TextBlock Margin="10 5">
+                            <Run Text="{DynamicResource Position}"/>
+                            <Run Text=":"/>
+                            </TextBlock>
+                            <ComboBox Margin="10 5" ItemsSource="{Binding Data.Positions}" SelectedItem="{Binding SelectedUser.Post}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Title}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </UniformGrid>
+                    </DockPanel>
+
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5" Command="{Binding CmdAddUser}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="AddBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="1" Command="{Binding CmdRemoveUser}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="RemoveBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="2" Command="{Binding CmdCancelUser}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="Cancel"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="3" Command="{Binding CmdSaveUser}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="ContentSave"/>
+                            </Viewbox>
+                        </Button>
+                        
+                    </Grid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="{DynamicResource Positions}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="80*"/>
+                        <RowDefinition Height="15*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{DynamicResource Position}" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"/>
+
+                    <DockPanel LastChildFill="False" Grid.Column="1" Grid.Row="1" Margin="10 5">
+                        <TextBlock Text="{DynamicResource ID}" DockPanel.Dock="Top"/>
+                        <TextBlock Text="{Binding SelectedPosition.ID}" DockPanel.Dock="Top" Margin="0 5"/>
+                        <TextBlock Text="{DynamicResource Title}" DockPanel.Dock="Top"/>
+                        <TextBox Text="{Binding SelectedPosition.Title}" DockPanel.Dock="Top"/>
+                    </DockPanel>
+
+                    <ListBox Grid.Column="0" Grid.Row="1" Margin="5"
+                             IsEnabled="{Binding IsSelectedListPosition}" 
+                             ItemsSource="{Binding Data.Positions}" 
+                             SelectedItem="{Binding SelectedPosition}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5" Command="{Binding CmdAddPosition}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="AddBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="1" Command="{Binding CmdRemovePosition}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="RemoveBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="2" Command="{Binding CmdCancelPosition}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="Cancel"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="3" Command="{Binding CmdSavePosition}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="ContentSave"/>
+                            </Viewbox>
+                        </Button>
+
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="{DynamicResource Products}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="80*"/>
+                        <RowDefinition Height="15*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox ItemsSource="{Binding Data.Products}" 
+                             SelectedItem="{Binding SelectedProduct}"
+                             Grid.Column="0" Grid.Row="1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5 1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*"/>
+                                        <ColumnDefinition Width="80*"/>
+                                        <ColumnDefinition Width="15*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding ID}" Grid.Column="0"/>
+                                    <TextBlock Text="{Binding Title}" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Price}" Grid.Column="2"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="true">
+                        <TextBlock Text="{DynamicResource IDP}" DockPanel.Dock="Top"/>
+                        <TextBlock Text="{Binding SelectedProduct.ID}" DockPanel.Dock="Top"/>
+                        <TextBlock Text="{DynamicResource Title}" DockPanel.Dock="Top"/>
+                        <TextBox Text="{Binding SelectedProduct.Title}" 
+                                 DockPanel.Dock="Top" Margin="5"/>
+                        <TextBlock Text="{DynamicResource Price}" DockPanel.Dock="Top"/>
+                        <TextBox Text="{Binding SelectedProduct.Price}" 
+                                 DockPanel.Dock="Top" Margin="5"/>
+                        <TextBlock Text="{DynamicResource Category}" DockPanel.Dock="Top"/>
+                        <ComboBox ItemsSource="{Binding Data.Categories}" 
+                                  SelectedItem="{Binding SelectedProduct.PCategory.Name}" 
+                                  DockPanel.Dock="Top" Margin="5">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="{DynamicResource Description}" DockPanel.Dock="Top"/>
+                        <TextBox Margin="5" Text="{Binding SelectedProduct.Description}" DockPanel.Dock="Top"/>
+                        
+                    </DockPanel>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5" Command="{Binding CmdAddProduct}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="AddBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="1" Command="{Binding CmdRemoveProduct}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="RemoveBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="2" Command="{Binding CmdCancelProduct}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="Cancel"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="3" Command="{Binding CmdSaveProduct}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="ContentSave"/>
+                            </Viewbox>
+                        </Button>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{DynamicResource Category}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="80*"/>
+                        <RowDefinition Height="15*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListBox ItemsSource="{Binding Data.Categories}" 
+                             SelectedItem="{Binding SelectedCategory}"
+                             IsEnabled="{Binding IsSelectedListCategory}"
+                             Grid.Column="0"
+                             Grid.Row="1" Margin="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
+                        <TextBlock DockPanel.Dock="Top">
+                            <Run Text="{DynamicResource ID}"/>
+                            <LineBreak/>
+                            <Run Text="{Binding SelectedCategory.ID}"/>
+                        </TextBlock>
+
+                        <TextBlock Text="{DynamicResource Category}" DockPanel.Dock="Top" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding SelectedCategory.Name}" DockPanel.Dock="Top"/>
+                    </DockPanel>
+
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5" Command="{Binding CmdAddCategory}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="AddBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="1" Command="{Binding CmdRemoveCategory}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="RemoveBox"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="2" Command="{Binding CmdCancelCategory}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="Cancel"/>
+                            </Viewbox>
+                        </Button>
+                        <Button Margin="5" Grid.Column="3" Command="{Binding CmdSaveCategory}">
+                            <Viewbox>
+                                <materialDesign:PackIcon Kind="ContentSave"/>
+                            </Viewbox>
+                        </Button>
+                    </Grid>
+                    
+                    
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
