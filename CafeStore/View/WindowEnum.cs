@@ -11,7 +11,7 @@ namespace CafeStore.View
         loginView,
         adminView,
         mainView,
-        profileView,
+        orderView,
         logView,
 
     }

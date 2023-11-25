@@ -44,7 +44,7 @@ namespace CafeStore.ViewModel
                 {
                     if (Data.SignIn(CurrentUser))
                     {
-                        MainViewModel vm = new MainViewModel(_navigation,Data);
+                        MainViewModel vm = new MainViewModel(_navigation,Data,CurrentUser);
                         _navigation.Show(View.WindowEnum.mainView, vm);
                     }
                     else

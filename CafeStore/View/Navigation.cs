@@ -56,8 +56,8 @@ namespace CafeStore.View
                 case WindowEnum.adminView:
                     CWindow = new AdminView();
                     break;
-                case WindowEnum.profileView:
-
+                case WindowEnum.orderView:
+                    CWindow = new OrderView();
                     break;
             }
             _currNavFrame = navigation;

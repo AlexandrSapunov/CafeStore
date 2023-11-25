@@ -43,12 +43,11 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="70*"/>
-                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Title}" Grid.Column="1"/>
-                        <TextBlock Text="{Binding Path=Price}" Grid.Column="2"/>
+                        <TextBlock Text="{Binding Path=Title}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Path=Price}" Grid.Column="1"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -57,9 +56,9 @@
 
         <UniformGrid Columns="2" Rows="2" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="15 5">
             <TextBlock Text="{DynamicResource OrderOnSum}" FontSize="20"/>
-            <TextBlock Text="{Binding CurrentOrder.Sum}"/>
+            <TextBlock Text="{Binding CurrentOrder.Sum}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock Text="Оплатить" FontSize="18"/>
-            <Button >
+            <Button Command="{Binding CmdPayment}">
                 <Viewbox>
                     <materialDesign:PackIcon Kind="Payment"/>
                 </Viewbox>
@@ -74,18 +73,17 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="70*"/>
-                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="10*"/>
-                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding Path=Title}" Grid.Column="1"/>
-                        <TextBlock Text="{Binding Path=Price}" Grid.Column="2"/>
-                        <TextBlock Text="{DynamicResource Quantity}" Grid.ColumnSpan="2" Grid.Row="1"/>
-                        <TextBlock Text="{Binding Quantity}" Grid.Column="2" Grid.Row="1"/>
+                        <TextBlock Text="{Binding Path=Title}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Path=Price}" Grid.Column="1"/>
+                        <TextBlock Text="{DynamicResource Quantity}" Grid.Column="0"  Grid.Row="1"/>
+                        <TextBlock Text="{Binding Quantity}" Grid.Column="1" Grid.Row="1"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

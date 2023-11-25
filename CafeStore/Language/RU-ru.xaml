@@ -21,6 +21,9 @@
     <system:String x:Key="OrderOnSum">Заказ на сумму</system:String>
     <system:String x:Key="Quantity">Количество</system:String>
     <system:String x:Key="AddInOrder">Добавить в заказ</system:String>
+    <system:String x:Key="Payment">Оплатить</system:String>
+    <system:String x:Key="EndSum">Сумма</system:String>
+    <system:String x:Key="Cancel">Отмена</system:String>
 
     <system:String x:Key="Information">Информация</system:String>
     <system:String x:Key="Discounts">Скидки</system:String>

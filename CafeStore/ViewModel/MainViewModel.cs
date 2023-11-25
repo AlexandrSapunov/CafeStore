@@ -1,6 +1,7 @@
 ﻿using CafeStore.Model;
 using CafeStore.Model.DataStorage;
 using CafeStore.Model.Product;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace CafeStore.ViewModel
     {
         private DataKeeper _data;
         private INavigationWin _navigation;
+        private RelayCommand _cmdPayment;
 
         public DataKeeper Data
         {
@@ -23,6 +25,24 @@ namespace CafeStore.ViewModel
             {
                 _data = value;
                 OnPropertyChanged(nameof(Data));
+            }
+        }
+        public User CurrentUser { get; set; }
+        public RelayCommand CmdPayment
+        {
+            get
+            {
+                return _cmdPayment ?? (_cmdPayment=new RelayCommand(obj =>
+                {
+                    _transmit();
+                    if (CurrentOrder.Products.Count > 0)
+                    {
+                        CurrentOrder.Salesman = CurrentUser;
+                        CurrentOrder.DateOfPurchase = DateTime.Now;
+                        OrderViewModel orderViewModel = new OrderViewModel(_navigation, Data, CurrentUser, CurrentOrder);
+                        _navigation.Show(View.WindowEnum.orderView, orderViewModel);
+                    }
+                }));
             }
         }
 
@@ -115,12 +135,24 @@ namespace CafeStore.ViewModel
         #endregion
 
         #region Order list
+        private Order _currentOrder;
         private RelayCommand _addQuantity;
         private RelayCommand _removeQuantity;
         private RelayCommand _delProductInOrder;
         private Product _selectedProductInOrder;
 
-        public Order CurrentOrder { get; set; }
+        public Order CurrentOrder
+        {
+            get
+            {
+                return _currentOrder;
+            }
+            set
+            {
+                _currentOrder = value;
+                OnPropertyChanged(nameof(CurrentOrder));
+            }
+        }
         public RelayCommand AddQuantity
         {
             get
@@ -190,12 +222,13 @@ namespace CafeStore.ViewModel
 
         #endregion
 
-        public MainViewModel(INavigationWin navigation,DataKeeper data)
+        public MainViewModel(INavigationWin navigation,DataKeeper data,User currentUser)
         {
             Data = data;
             _navigation=navigation;
             ProductList = new ObservableCollection<Product>(Data.Products);
             CurrentOrder = new Order();
+            CurrentUser = currentUser;
             _initCmd();
         }
 
@@ -205,7 +238,16 @@ namespace CafeStore.ViewModel
             AddQuantity.IsExecutable = true;
             RemoveQuantity.IsExecutable= true;
             DelProductInOrder.IsExecutable = true;
+            CmdPayment.IsExecutable = true;
+        }
 
+        private void _transmit()
+        {
+            CurrentOrder.Products.Clear();
+            foreach(var item in OrderProducts)
+            {
+                CurrentOrder.Products.Add(item);
+            }
         }
     }
 }

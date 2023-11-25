@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CafeStore.Model.Product;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace CafeStore.Model
         private User _salesman;
         private DateTime _dateOfPurchase;
         private int _sum;
+        private ObservableCollection<Product.Product> _products;
 
         public User Salesman
         {
@@ -49,7 +51,18 @@ namespace CafeStore.Model
                 OnPropertyChanged(nameof(Sum));
             }
         }
-        public ObservableCollection<Product.Product> Products { get; set; }
+        public ObservableCollection<Product.Product> Products
+        {
+            get
+            {
+                return _products;
+            }
+            set
+            {
+                _products = value;
+                OnPropertyChanged(nameof(Products));
+            }
+        }
 
         public Order()
         {
