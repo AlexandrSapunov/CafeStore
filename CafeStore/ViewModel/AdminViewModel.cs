@@ -7,10 +7,12 @@ namespace CafeStore.ViewModel
     public class AdminViewModel : BaseVM
     {
         public DataKeeper Data { get; set; }
+        private INavigationWin _navigation;
 
 
-        public AdminViewModel()
+        public AdminViewModel(INavigationWin navigation)
         {
+            _navigation = navigation;
             Data = DataKeeper.Load();
             if (Data == null)
                 Data = new DataKeeper();

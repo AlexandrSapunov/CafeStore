@@ -88,12 +88,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <UniformGrid Columns="3" Rows="1" Grid.Row="2">
-            <Button MaxHeight="60" MaxWidth="150" >
-                <Viewbox>
-                    <TextBlock Text="{DynamicResource Profile}"/>
-                </Viewbox>
-            </Button>
+        <UniformGrid Columns="2" Rows="1" Grid.Row="2">
             <Button MaxHeight="60" MaxWidth="150" Command="{Binding AddInOrder}">
                 <Viewbox>
                     <TextBlock Text="{DynamicResource AddInOrder}"/>

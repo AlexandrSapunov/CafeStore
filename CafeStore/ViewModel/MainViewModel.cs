@@ -14,6 +14,7 @@ namespace CafeStore.ViewModel
         private DataKeeper _data;
         private INavigationWin _navigation;
         private RelayCommand _cmdPayment;
+        private RelayCommand _cmdAdmin;
 
         public DataKeeper Data
         {
@@ -42,6 +43,17 @@ namespace CafeStore.ViewModel
                         OrderViewModel orderViewModel = new OrderViewModel(_navigation, Data, CurrentUser, CurrentOrder);
                         _navigation.Show(View.WindowEnum.orderView, orderViewModel);
                     }
+                }));
+            }
+        }
+        public RelayCommand CmdAdmin
+        {
+            get
+            {
+                return _cmdAdmin ?? (_cmdAdmin=new RelayCommand(obj =>
+                {
+                    AdminViewModel advm = new AdminViewModel(_navigation);
+                    _navigation.Show(View.WindowEnum.adminView,advm);
                 }));
             }
         }
