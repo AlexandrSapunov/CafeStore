@@ -51,9 +51,7 @@ namespace CafeStore.Model.DataStorage
             }
         }
 
-
         #region User
-
         public bool AddUser(User user)
         {
             if (user.Fname.Length > 0 && user.Sname.Length > 0)
@@ -85,7 +83,6 @@ namespace CafeStore.Model.DataStorage
             }
             return false;
         }
-
         public bool SignIn(User user)
         {
             if (user != null)
@@ -107,7 +104,6 @@ namespace CafeStore.Model.DataStorage
             }
             return false;
         }
-
         private int _getMaxIDUser()
         {
             int max = Users.Count + 1;
@@ -131,7 +127,6 @@ namespace CafeStore.Model.DataStorage
             }
             return false;
         }
-
         public bool DelPosition(Position position)
         {
             if (position != null)
@@ -141,7 +136,6 @@ namespace CafeStore.Model.DataStorage
             }
             return false;
         }
-
         private int _getMaxIDPosition()
         {
             int max = Positions.Count + 1;
@@ -168,7 +162,6 @@ namespace CafeStore.Model.DataStorage
             }
             return false;
         }
-
         public bool DelCategory(Category category)
         {
             if (category != null)

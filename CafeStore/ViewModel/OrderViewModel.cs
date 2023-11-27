@@ -52,7 +52,7 @@ namespace CafeStore.ViewModel
                 {
                     Data.Orders.Add(CurrentOrder);
                     MainViewModel vm = new MainViewModel(_navigationWin,Data,CurrentUser);
-
+                    //вывод на ккм
                     _navigationWin.Show(View.WindowEnum.mainView, vm);
                 }));
             }

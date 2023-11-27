@@ -18,6 +18,11 @@ namespace CafeStore.ViewModel
                 Data = new DataKeeper();
             _initState();
         }
+        public AdminViewModel()
+        {
+            Data = DataKeeper.Load();
+            _initState();
+        }
 
         #region User
         private RelayCommand _cmdAddUser;
@@ -59,7 +64,6 @@ namespace CafeStore.ViewModel
                 return _cmdAddUser ?? (_cmdAddUser = new RelayCommand(obj =>
                 {
                     SelectedUser = new User();
-
                     _setUserState(ViewState.edit);
                 }));
             }
